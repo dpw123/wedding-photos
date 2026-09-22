@@ -48,7 +48,7 @@ export const main = async (c) => {
   // Append context with date for the upcoming publication date
   c.set('KV-Cache-Expires', upcomingPublication);
 
-  const isEmbed = c.req.path === '/embed' || c.req.query('embed') === 'true';
+  const isEmbed = c.req.path === '/embed' || c.req.path === '/embed/' || c.req.query('embed') === 'true';
 
   return c.html(
     <Layout

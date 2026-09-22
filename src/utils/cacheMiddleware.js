@@ -23,7 +23,9 @@ export const cache = () => {
 
       // Generate versioned cache key to bust stale cache
       const CACHE_VERSION = "v8";
-      const cacheKey = `page:${CACHE_VERSION}:${new URL(c.req.url).pathname}@${lang}`;
+      const pathname = new URL(c.req.url).pathname;
+      const isEmbed = pathname === '/embed' || c.req.query('embed') === 'true';
+      const cacheKey = `page:${CACHE_VERSION}:${pathname}${isEmbed && pathname !== '/embed' ? ':embed' : ''}@${lang}`;
 
       // Try to get cached content from KV
       const cachedContent = await c.env.CACHE_KV.getWithMetadata(cacheKey);
