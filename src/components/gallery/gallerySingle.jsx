@@ -34,7 +34,7 @@ export const Gallery = ({ gallery, images, c }) => (
                 id="closeUploadDialog"
                 aria-label="Close dialog"
               >
-                &times;
+                <i className="bi bi-x-lg"></i>
               </button>
               <h3>{c.t("upload_modal_title")}</h3>
               <p className="modal-subtitle">{c.t("upload_modal_desc")}</p>

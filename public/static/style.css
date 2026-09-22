@@ -124,17 +124,31 @@ select:is(:focus, :active) {
   position: relative;
 }
 
+.wedding-hero h1,
+.wedding-hero h2,
+.wedding-hero h3,
+.wedding-hero .wedding-title-compact,
+.wedding-hero .wedding-title-compact a,
 h1.wedding-title-compact,
+h2.wedding-title-compact,
 .wedding-title-compact,
-.wedding-title-compact a {
+.wedding-title-compact a,
+.wedding-title,
+.wedding-title a {
   margin: 0.1rem 0 0.25rem;
-  font-family: var(--font-heading);
-  font-size: clamp(2rem, 5.5vw, 3rem);
-  font-weight: 500;
-  color: #ffffff;
-  line-height: 1.15;
-  text-shadow: 0 2px 14px rgba(45, 38, 22, 0.4);
-  text-decoration: none;
+  font-family: "WindSong", cursive !important;
+  font-size: clamp(2.4rem, 6vw, 3.6rem) !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  line-height: 1.15 !important;
+  text-shadow: 0 2px 14px rgba(45, 38, 22, 0.4) !important;
+  text-decoration: none !important;
+}
+
+.wedding-hero a.wedding-title-compact:hover,
+.wedding-hero .wedding-title-compact a:hover {
+  color: #ffffff !important;
+  text-decoration: none !important;
 }
 
 .wedding-date {

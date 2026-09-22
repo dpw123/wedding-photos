@@ -29,9 +29,9 @@ export const Layout = (props) => {
         <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
         <link rel="stylesheet" href="${getPicoCSS(c)}" />
-        <link rel="stylesheet" href="/static/style.css" />
-        <link rel="stylesheet" href="/static/gallery.css" />
-        <link rel="stylesheet" href="/static/photoswipe.css" />
+        <link rel="stylesheet" href="/static/style.css?v=6" />
+        <link rel="stylesheet" href="/static/gallery.css?v=6" />
+        <link rel="stylesheet" href="/static/photoswipe.css?v=6" />
         ${<HeadScripts />}
       </head>
       <body>
@@ -51,17 +51,20 @@ export const Layout = (props) => {
             ` : ''}
             <div class="decorative-line"></div>
             <nav class="button-row" aria-label="Gallery navigation">
-              <a class="button" href="https://danlauren.wedding">
-                <i class="bi bi-arrow-left"></i> ${c.t("wedding_website_link")}
-              </a>
-              <a class="button" href="/">
-                <i class="bi bi-images"></i> ${c.t("all_albums_link")}
-              </a>
-              ${isSingleGallery && gallery.Password ? html`
-                <a class="button" href="/${gallery.GalleryTableName}/logout">
-                  ${c.t("forget_gallery_password")}
+              ${isSingleGallery ? html`
+                <a class="button" href="/">
+                  <i class="bi bi-arrow-left"></i> ${c.t("all_albums_link")}
                 </a>
-              ` : ''}
+                ${gallery.Password ? html`
+                  <a class="button" href="/${gallery.GalleryTableName}/logout">
+                    ${c.t("forget_gallery_password")}
+                  </a>
+                ` : ''}
+              ` : html`
+                <a class="button" href="https://danlauren.wedding">
+                  <i class="bi bi-arrow-left"></i> ${c.t("wedding_website_link")}
+                </a>
+              `}
             </nav>
           </div>
         </header>

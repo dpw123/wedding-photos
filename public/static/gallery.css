@@ -64,14 +64,17 @@
   background-color: var(--color-neutral-medium);
 }
 
-.gallery-name {
+.gallery-name,
+h2.gallery-name,
+.gallery-card h2,
+.gallery-card .gallery-name {
   margin: 0 0 0.5rem 0;
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  font-weight: 500;
-  line-height: 1.15;
-  color: #ffffff;
-  text-shadow: 0 1px 6px rgba(45, 38, 22, 0.35);
+  font-family: "WindSong", cursive !important;
+  font-size: 2rem !important;
+  font-weight: 500 !important;
+  line-height: 1.15 !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 6px rgba(45, 38, 22, 0.35) !important;
   text-align: center;
   width: 100%;
 }
@@ -158,16 +161,22 @@ dialog.upload-dialog::backdrop {
   position: relative;
 }
 
-.upload-modal-header {
+.upload-modal-content > header,
+.upload-modal-header,
+header.upload-modal-header {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-bottom: none !important;
+  margin: 0 0 1.4rem 0 !important;
+  padding: 0 !important;
   text-align: center;
-  margin-bottom: 1.4rem;
   position: relative;
 }
 
 .upload-modal-header h3 {
-  font-family: var(--font-heading);
-  font-size: 2.2rem;
-  color: #ffffff;
+  font-family: "WindSong", cursive !important;
+  font-size: 2.2rem !important;
+  color: #ffffff !important;
   margin: 0 0 0.3rem 0;
   text-shadow: 0 1px 8px rgba(45, 38, 22, 0.4);
 }
@@ -183,22 +192,36 @@ dialog.upload-dialog::backdrop {
   position: absolute;
   top: -0.6rem;
   right: -0.6rem;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--color-neutral-light);
-  color: var(--color-pink-dark);
-  display: grid;
-  place-items: center;
-  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--border) !important;
+  background: var(--color-neutral-light) !important;
+  color: var(--color-pink-dark) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
   cursor: pointer;
-  line-height: 1;
-  transition: transform 0.15s ease, background 0.15s ease;
+  box-shadow: 0 2px 8px rgba(45, 38, 22, 0.15) !important;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.upload-modal-header .close-btn i {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .upload-modal-header .close-btn:hover {
-  background: #ffffff;
+  background: #ffffff !important;
+  color: var(--color-green-dark) !important;
   transform: scale(1.1);
 }
 
@@ -317,7 +340,20 @@ dialog.upload-dialog::backdrop {
   width: 100%;
 }
 
-/* Masonry Photo Grid */
+/* Masonry Photo Grid - Modern square photo layout without rounded corners */
+#mansory-wraper,
+#mansory-wraper *,
+#masonry-container,
+#masonry-container *,
+.masonry-item,
+.masonry-item-content,
+.masonry-item a,
+.masonry-item img,
+.placeholder {
+  border-radius: 0 !important;
+  -webkit-border-radius: 0 !important;
+}
+
 #mansory-wraper {
   margin: 0 auto;
   box-sizing: border-box;
