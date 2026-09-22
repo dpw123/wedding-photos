@@ -42,20 +42,22 @@ export const getImageWithTransforms = (c, img, location="main", format="auto") =
     {
         // thumbnails for sliders
         case "slider-thumb":
-            cloudFlareBase += ",q=60,w=70,h=70";
+            cloudFlareBase += ",q=70,w=120,h=120,fit=cover";
         break;
         // Thumbnail for images in a gallery
         case "gallery-thumb":
+            cloudFlareBase += ",q=85,w=1200,fit=scale-down";
+        break;
         // Used for the image gallery cover images
         case "cover":
-            cloudFlareBase += ",q=80,w=433,h=200,fit=scale-down";
+            cloudFlareBase += ",q=85,w=960,fit=scale-down";
         break;
         // Used for the global slider
         case "slider":
         // Full sized images
         case "main":
         case "full":
-            cloudFlareBase += ",q=85";
+            cloudFlareBase += ",q=90";
         break;
     }
     return cloudFlareBase + baseImgLocation;

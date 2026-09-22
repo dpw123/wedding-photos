@@ -97,8 +97,7 @@ export const main = async (c) => {
                         "cover"
                       )}
                       alt={gallery.GalleryName}
-                      width="433px"
-                      height="220px"
+                      loading="lazy"
                       className="gallery-card-image"
                     />
                   ) : (
