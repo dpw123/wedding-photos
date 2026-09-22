@@ -78,5 +78,14 @@
   "enter_password": "Enter password",
   "open_gallery": "Open Gallery",
   "gallery_incorrect_password": "Incorrect password",
-  "forget_gallery_password": "Forget Password"
+  "forget_gallery_password": "Forget Password",
+  "upload_passcode_label": "Upload Passcode",
+  "upload_passcode_placeholder": "Passcode to allow guest uploads",
+  "upload_photos_button": "Add Photos",
+  "upload_modal_title": "Add Photos to Album",
+  "upload_modal_desc": "Share your favorite moments with Lauren & Daniel! Enter the album passcode to upload photos.",
+  "enter_upload_passcode": "Enter album upload passcode",
+  "upload_passcode_incorrect": "Incorrect upload passcode. Please check and try again.",
+  "wedding_website_link": "Wedding Website",
+  "all_albums_link": "All Albums"
 }

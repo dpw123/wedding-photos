@@ -108,7 +108,7 @@ const Singlegallery = (props) => {
                 <div
                   className="admin-card-thumb"
                   data-tooltip={
-                    props.gallery.CoverImage === getImagePath(c, image.path)
+                    (props.gallery.CoverImage && (props.gallery.CoverImage === getImagePath(c, image.path) || props.gallery.CoverImage.endsWith(image.path)))
                       ? c.t("current_thumb")
                       : c.t("set_as_thumb")
                   }
@@ -118,10 +118,10 @@ const Singlegallery = (props) => {
                   )}&galleryTableName=${props.gallery.GalleryTableName}`}
                   hx-target="this"
                 >
-                  {props.gallery.CoverImage === getImagePath(c, image.path) ? (
-                    <i className="bi bi-star-fill"></i>
+                  {(props.gallery.CoverImage && (props.gallery.CoverImage === getImagePath(c, image.path) || props.gallery.CoverImage.endsWith(image.path))) ? (
+                    <i className="bi bi-star-fill" style="color: #eab308; font-size: 1.3rem;"></i>
                   ) : (
-                    <i className="bi bi-star"></i>
+                    <i className="bi bi-star" style="font-size: 1.3rem;"></i>
                   )}
                 </div>
               </div>

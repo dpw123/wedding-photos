@@ -19,8 +19,31 @@ export const main = async (c) => {
     return c.text(galleriesResponse, 202);
   }
 
-  const { results: galleries } = galleriesResponse;
-  const hasGalleries = galleries.length != 0;
+  const { results: rawGalleries } = galleriesResponse;
+  const hasGalleries = rawGalleries.length != 0;
+
+  // Resolve cover image: use selected CoverImage or default to the first image in the album
+  const galleries = await Promise.all(
+    rawGalleries.map(async (gallery) => {
+      let cover = gallery.CoverImage;
+      if (!cover || cover.trim() === "") {
+        try {
+          const firstImage = await c.env.DB.prepare(
+            `SELECT path FROM ${gallery.GalleryTableName} WHERE approved = TRUE ORDER BY rowid ASC LIMIT 1`
+          ).first();
+          if (firstImage && firstImage.path) {
+            cover = firstImage.path;
+          }
+        } catch (e) {
+          console.error("Error retrieving fallback cover image:", e);
+        }
+      }
+      return {
+        ...gallery,
+        CoverImage: cover || "",
+      };
+    })
+  );
 
   // Append context with date for the upcoming publication date
   c.set('KV-Cache-Expires', upcomingPublication)
@@ -58,23 +81,29 @@ export const main = async (c) => {
                       )}
                       alt={gallery.GalleryName}
                       width="433px"
-                      height="200px"
+                      height="220px"
                       className="gallery-card-image"
                     />
                   ) : (
-                    <img
-                      src="https://placehold.co/433x200.jpg"
-                      alt="No image"
+                    <div
                       className="gallery-card-image"
-                    />
+                      style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--color-pink-light); color: var(--color-pink-dark);"
+                    >
+                      <i className="bi bi-images" style="font-size: 2.5rem; margin-bottom: 0.3rem;"></i>
+                      <span style="font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Wedding Album</span>
+                    </div>
                   )}
                   <div className="gallery-content">
                     <h2 className="gallery-name">{gallery.GalleryName}</h2>
                     {gallery.PartyDate && (
                       <div className="gallery-date">
-                        {new Date(gallery.PartyDate).toLocaleDateString(
-                          c.t("date_locale")
-                        )}
+                        <span className="pill">
+                          <i className="bi bi-calendar-event"></i>
+                          {new Date(gallery.PartyDate).toLocaleDateString(
+                            c.t("date_locale"),
+                            { day: "numeric", month: "long", year: "numeric" }
+                          )}
+                        </span>
                       </div>
                     )}
                   </div>

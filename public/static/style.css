@@ -1,42 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap');
+
+:root,
+[data-theme="light"],
+[data-theme="dark"],
+html {
+  /* Fonts */
+  --font-family: "Calisto MT", Georgia, serif;
+  --font-heading: "WindSong", cursive;
+
+  /* Wedding Color Palette */
+  --color-pink-light: #F9EBE6;
+  --color-pink-medium: #E4C1B6;
+  --color-pink-dark: #AD8C84;
+
+  --color-neutral-light: #F2EEE8;
+  --color-neutral-medium: #DCD2C6;
+  --color-neutral-dark: #A99E91;
+
+  --color-green-light: #E3EDE4;
+  --color-green-medium: #B9C8B5;
+  --color-green-dark: #697665;
+
+  --border: rgba(169, 158, 145, 0.45);
+  --text-dark: #2d2616;
+  --text-white: #ffffff;
+  --max-width: 1040px;
+
+  /* Pico CSS overrides to match Wedding Palette */
+  --pico-font-family: var(--font-family);
+  --pico-font-family-serif: var(--font-family);
+  --pico-background-color: var(--color-neutral-light);
+  --pico-color: var(--text-dark);
+  --pico-muted-color: var(--color-green-dark);
+  --pico-muted-border-color: var(--border);
+  --pico-primary: var(--color-green-dark);
+  --pico-primary-background: var(--color-green-dark);
+  --pico-primary-hover: #556052;
+  --pico-primary-hover-background: #556052;
+  --pico-primary-inverse: #ffffff;
+  --pico-card-background-color: var(--color-neutral-medium);
+  --pico-card-border-color: var(--border);
+  --pico-card-box-shadow: 0 12px 30px rgba(105, 118, 101, 0.12);
+  --pico-form-element-background-color: #ffffff;
+  --pico-form-element-border-color: var(--color-neutral-dark);
+  --pico-form-element-color: var(--text-dark);
+  --pico-form-element-focus-color: var(--color-green-dark);
+  --pico-border-radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-neutral-light);
+}
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 0 1rem;
+  color: var(--text-dark);
+  background: var(--color-neutral-light);
+  font: 500 1.15rem/1.8 var(--font-family);
   box-sizing: border-box;
+}
+
+/* Fixed site logo (matches main wedding site) */
+.site-logo {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 99;
+  width: clamp(3.2rem, 8vw, 5rem);
+  height: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  pointer-events: auto;
+}
+
+.site-logo:hover {
+  transform: scale(1.06);
 }
 
 main {
   flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
-nav h2 {
-  margin-bottom: 0.3rem;
+/* Wedding Hero & Header Banner */
+.wedding-header {
+  margin: 1rem auto 1.5rem;
+  max-width: var(--max-width);
+  width: 100%;
 }
 
-header h1 {
+.wedding-hero {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--color-neutral-medium);
+  box-shadow: 0 12px 30px rgba(105, 118, 101, 0.12);
+  padding: 1.2rem 1.4rem;
   text-align: center;
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  position: relative;
 }
 
-#theme-switcher {
-  margin-bottom: 0;
+h1.wedding-title-compact,
+.wedding-title-compact {
+  margin: 0.1rem 0 0.25rem;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5.5vw, 3rem);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.15;
+  text-shadow: 0 2px 14px rgba(45, 38, 22, 0.4);
+}
+  margin: 0.2rem 0 0.8rem;
+  font-weight: 600;
 }
 
+.wedding-date {
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: var(--color-pink-dark);
+  font-size: 1.05rem;
+}
+
+/* Signature Decorative Underline */
+.decorative-line {
+  content: "";
+  display: block;
+  height: 8px;
+  width: 140px;
+  margin: 0.5rem auto 1.2rem;
+  background: radial-gradient(circle at left, var(--color-pink-dark)),
+              radial-gradient(circle at center, var(--color-pink-dark)),
+              radial-gradient(circle at right, var(--color-pink-dark));
+  border-radius: 999px;
+}
+
+/* Button & Pill Styling matching main wedding website */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.1rem;
+}
+
+.button,
+a.button,
+button.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55em 1.25em;
+  border: 1px solid var(--color-neutral-dark);
+  border-radius: 999px;
+  color: var(--color-pink-dark);
+  background: var(--color-neutral-medium);
+  text-decoration: none;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  box-shadow: 0 2px 6px rgba(105, 118, 101, 0.08);
+}
+
+.button:hover,
+a.button:hover,
+button.button:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-green-dark);
+  background: var(--color-neutral-light);
+  color: var(--color-green-dark);
+  text-decoration: none;
+}
+
+.button.primary,
+a.button.primary,
+button.button.primary {
+  background: var(--color-green-dark);
+  color: #ffffff !important;
+  border-color: var(--color-green-dark);
+}
+
+.button.primary:hover,
+a.button.primary:hover,
+button.button.primary:hover {
+  background: #556052;
+  border-color: #556052;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--color-neutral-dark);
+  border-radius: 999px;
+  color: var(--color-pink-dark);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--color-neutral-light);
+}
+
+/* Footer matching main website */
+footer {
+  margin-top: auto;
+  padding: 3rem 1.2rem 4rem;
+  text-align: center;
+  color: var(--color-pink-dark);
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+footer hr {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.footer-credits {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-neutral-dark);
+}
+
+.footer-credits a {
+  color: var(--color-pink-dark);
+  text-decoration: none;
+}
+
+.footer-credits a:hover {
+  text-decoration: underline;
+}
+
+/* Password protection card */
 article.password {
-  margin: 2rem auto;
-  max-width: 600px;
+  margin: 3rem auto;
+  max-width: 540px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--color-neutral-medium);
+  box-shadow: 0 12px 30px rgba(105, 118, 101, 0.12);
+  padding: 2rem;
 }
 
 .password-box-header {
-  padding: 8px 18px;
   text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.password-box-header h2 {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  color: #ffffff;
+  margin: 0.2rem 0;
 }
 
 form.password {
@@ -44,23 +275,34 @@ form.password {
 }
 
 strong.error {
-  color: red;
+  color: #9e2a2b;
+  font-weight: 600;
 }
 
-footer {
-  margin-top: auto;
-}
-
-/* Prevent from showing tooltip on touch devices */
-@media (pointer: coarse) {
-  [data-tooltip]:hover::before,
-  [data-tooltip]:hover::after {
-    display: none !important;
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  body {
+    padding: 0 0.6rem;
+    font-size: 1rem;
   }
-}
 
-/* Replace dark mode icon by removing second star in the corner*/
-[type="checkbox"][role="switch"][name="color-mode-toggle"]:checked::before {
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath d='M6,0.278c.199186.242906.230846.582457.08.858-.578463,1.061348-.880409,2.251251-.878,3.46c0,4.021,3.278,7.277,7.318,7.277q.792-.001,1.533-.16c.308895-.06608.627459.058199.81.316.194325.269965.181578.63716-.031.893-1.588506,1.951055-3.97206,3.081847-6.488,3.078C3.734,16,0,12.286,0,7.71C0,4.266,2.114,1.312,5.124,0.06c.307937-.130871.665318-.041934.876.218'/%3E%3Cpath d='M10.794,3.148c.029411-.088819.112438-.148787.206-.148787s.176589.059968.206.148787l.387,1.162c.173.518.579.924,1.097,1.097l1.162.387c.088819.029411.148787.112438.148787.206s-.059968.176589-.148787.206l-1.162.387c-.518318.172022-.924978.578682-1.097,1.097l-.387,1.162c-.029411.088819-.112438.148787-.206.148787s-.176589-.059968-.206-.148787L10.407,7.69c-.172022-.518318-.578682-.924978-1.097-1.097L8.148,6.206c-.088819-.029411-.148787-.112438-.148787-.206s.059968-.176589.148787-.206L9.31,5.407c.518318-.172022.924978-.578682,1.097-1.097l.387-1.162Z'/%3E%3C/svg%3E") !important;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath d='M6,0.278c.199186.242906.230846.582457.08.858-.578463,1.061348-.880409,2.251251-.878,3.46c0,4.021,3.278,7.277,7.318,7.277q.792-.001,1.533-.16c.308895-.06608.627459.058199.81.316.194325.269965.181578.63716-.031.893-1.588506,1.951055-3.97206,3.081847-6.488,3.078C3.734,16,0,12.286,0,7.71C0,4.266,2.114,1.312,5.124,0.06c.307937-.130871.665318-.041934.876.218'/%3E%3Cpath d='M10.794,3.148c.029411-.088819.112438-.148787.206-.148787s.176589.059968.206.148787l.387,1.162c.173.518.579.924,1.097,1.097l1.162.387c.088819.029411.148787.112438.148787.206s-.059968.176589-.148787.206l-1.162.387c-.518318.172022-.924978.578682-1.097,1.097l-.387,1.162c-.029411.088819-.112438.148787-.206.148787s-.176589-.059968-.206-.148787L10.407,7.69c-.172022-.518318-.578682-.924978-1.097-1.097L8.148,6.206c-.088819-.029411-.148787-.112438-.148787-.206s.059968-.176589.148787-.206L9.31,5.407c.518318-.172022.924978-.578682,1.097-1.097l.387-1.162Z'/%3E%3C/svg%3E") !important;
+  .site-logo {
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 3.2rem;
+  }
+
+  .wedding-hero {
+    padding: 1.5rem 1rem;
+    border-radius: 14px;
+  }
+
+  h1.wedding-title {
+    font-size: 2.2rem;
+  }
+
+  .button {
+    font-size: 0.88rem;
+    padding: 0.48em 1em;
+  }
 }

@@ -11,24 +11,24 @@ bucket_name = "pineapplegallery-bucket"
 [[d1_databases]]
 binding = "DB"
 database_name = "pineapplegallery-database"
-database_id = "30cffc37-e133-49db-8534-6524c89de2bb"
+database_id = "1c365a6b-0608-4d74-a5c0-6ecfdf9a55e4"
 
 [[kv_namespaces]]
 binding = "CACHE_KV"
-id = "42ee21cd50bf44adb285c6c3d02727cd"
+id = "0731a49b8c1042d199e125d6ceff50a5"
 
 #----------------------------------------------------------- CONFIG
 
 [vars]
 
 # Page title
-PAGE_TITLE = "Pineapple Gallery"
+PAGE_TITLE = "Lauren & Daniel | Wedding Gallery"
 
 # Page description
-DESCRIPTION = "Pineapple Gallery is a project designed to serve up image galleries using Cloudflare!"
+DESCRIPTION = "Wedding photo gallery for Lauren Cheveralls & Daniel Welch celebration on 31 August 2027"
 
 # Copyright attribution name
-COPYRIGHT = "Pineapple Gallery"
+COPYRIGHT = "Lauren Cheveralls & Daniel Welch"
 
 # Image transformations
 IMGT = "true"
@@ -42,7 +42,7 @@ USE_CACHE = "true"
 
 # Path to the gallery application (should contain no slashes, unless this serves on root, which then it should be a single slash)
 # Make sure to also update index.jsx accordingly.
-GALLERY_PATH = "gallery"
+GALLERY_PATH = "/"
 
 # Color scheme used for CSS
 # Valid color names can be found here: https://picocss.com/docs/colors

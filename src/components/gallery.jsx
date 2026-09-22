@@ -9,6 +9,7 @@ import { cache } from '../utils/cacheMiddleware';
 import { trimTrailingSlash } from 'hono/trailing-slash'
 import { passwordProtection } from '../utils/passwordMiddleware';
 import { handleLogout } from '../utils/logoutHandler';
+import { handleUserUpload } from './gallery/userUploadPost';
 
 
 export const gallery = new Hono({ strict: true });
@@ -38,6 +39,9 @@ gallery.get("/", main);
 
 // Handle gallery logout - before cache
 gallery.get('/:galleryTableName/logout', handleLogout);
+
+// Guest photo upload endpoint with passcode verification
+gallery.post('/:galleryTableName/upload', handleUserUpload);
 
 // Password protection middleware
 gallery.use('/:galleryTableName', passwordProtection());

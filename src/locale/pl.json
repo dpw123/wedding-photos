@@ -78,5 +78,14 @@
   "enter_password": "Wprowadź hasło",
   "open_gallery": "Otwórz galerię",
   "gallery_incorrect_password": "Nieprawidłowe hasło",
-  "forget_gallery_password": "Zapomnij hasło"
+  "forget_gallery_password": "Zapomnij hasło",
+  "upload_passcode_label": "Kod dostępu do przesyłania",
+  "upload_passcode_placeholder": "Kod dostępu do przesyłania zdjęć przez gości",
+  "upload_photos_button": "Dodaj zdjęcia",
+  "upload_modal_title": "Dodaj zdjęcia do albumu",
+  "upload_modal_desc": "Podziel się swoimi zdjęciami! Wprowadź kod dostępu do albumu, aby przesłać zdjęcia.",
+  "enter_upload_passcode": "Wprowadź kod dostępu do przesyłania",
+  "upload_passcode_incorrect": "Nieprawidłowy kod dostępu. Sprawdź i spróbuj ponownie.",
+  "wedding_website_link": "Strona weselna",
+  "all_albums_link": "Wszystkie albumy"
 }

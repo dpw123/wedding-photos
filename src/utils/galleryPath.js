@@ -17,8 +17,23 @@ export const getImagePath = (c, img) => {
 };
 
 export const getImageWithTransforms = (c, img, location="main", format="auto") => {
-    // Covers already have the path transform done to them.
-    const baseImgLocation = (location !== "cover") ? getImagePath(c, img) : img;
+    if (!img) return "";
+    if (img.startsWith("http://") || img.startsWith("https://")) {
+        return img;
+    }
+
+    let baseImgLocation;
+    let cleanImg = img;
+    if (cleanImg.startsWith("/gallery/img/")) {
+        cleanImg = cleanImg.replace("/gallery/img/", "/img/");
+    }
+
+    if (cleanImg.startsWith("/img/")) {
+        baseImgLocation = cleanImg;
+    } else {
+        baseImgLocation = getImagePath(c, cleanImg.replace(/^\/+/, ""));
+    }
+
     if (c.env.IMGT === "false") {
         return baseImgLocation;
     }

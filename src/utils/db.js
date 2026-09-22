@@ -1,10 +1,20 @@
 import { getGalleryPath, getImagePath, getImageWithTransforms } from './galleryPath';
 
+const ensureUploadPasscodeColumn = async (c) => {
+  try {
+    await c.env.DB.prepare("ALTER TABLE Galleries ADD COLUMN UploadPasscode TEXT").run();
+  } catch (e) {
+    // Column already exists or error ignored
+  }
+};
+
 export const getGalleriesFromD1 = async (c) => {
+  await ensureUploadPasscodeColumn(c);
   return await c.env.DB.prepare("SELECT * FROM Galleries ORDER BY PartyDate DESC").all();
 };
 
 export const getGalleriesFromD1wGalleryIsPublic = async (c) => {
+  await ensureUploadPasscodeColumn(c);
   try {
     // Attempt to fetch data from the Galleries table
     const galleries = await c.env.DB.prepare('SELECT * FROM Galleries WHERE GalleryIsPublic = "TRUE" AND (DATETIME(PublicationDate) <= DATETIME("now")  OR PublicationDate = "") ORDER BY PartyDate DESC').all();
@@ -26,7 +36,8 @@ export const getGalleriesFromD1wGalleryIsPublic = async (c) => {
         Reviewers TEXT,
         Password TEXT,
         Tags TEXT,
-        Location TEXT
+        Location TEXT,
+        UploadPasscode TEXT
       );
     `;
 
@@ -50,8 +61,9 @@ export const upcomingPublicationDate = async (c) => {
 }
 
 export const updateGalleryOnD1 = async (c, formObject) => {
+  await ensureUploadPasscodeColumn(c);
   return await c.env.DB.prepare(
-    "UPDATE Galleries SET GalleryName = ?1, TextField = ?3, PartyDate = ?4, PublicationDate = ?5, GalleryIsPublic = ?6, ImagesOrder = ?7, Reviewers = ?8, Password = ?9, Tags = ?10, Location = ?11 WHERE GalleryTableName = ?2;"
+    "UPDATE Galleries SET GalleryName = ?1, TextField = ?3, PartyDate = ?4, PublicationDate = ?5, GalleryIsPublic = ?6, ImagesOrder = ?7, Reviewers = ?8, Password = ?9, Tags = ?10, Location = ?11, UploadPasscode = ?12 WHERE GalleryTableName = ?2;"
   )
     .bind(
       formObject.GalleryName,
@@ -64,15 +76,17 @@ export const updateGalleryOnD1 = async (c, formObject) => {
       formObject.Reviewers,
       formObject.Password,
       formObject.Tags,
-      formObject.Location
+      formObject.Location,
+      formObject.UploadPasscode || ""
     )
     .all();
 };
 
 export const createGallery = async (c, formObject) => {
+  await ensureUploadPasscodeColumn(c);
   return await c.env.DB.batch([
     c.env.DB.prepare(
-      "INSERT INTO Galleries (GalleryName, GalleryTableName, TextField, CoverImage, PartyDate, PublicationDate, GalleryIsPublic, ImagesOrder, Reviewers, Password, Tags, Location) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12)"
+      "INSERT INTO Galleries (GalleryName, GalleryTableName, TextField, CoverImage, PartyDate, PublicationDate, GalleryIsPublic, ImagesOrder, Reviewers, Password, Tags, Location, UploadPasscode) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13)"
     ).bind(
       formObject.GalleryName,
       formObject.GalleryTableName,
@@ -85,7 +99,8 @@ export const createGallery = async (c, formObject) => {
       formObject.Reviewers,
       formObject.Password,
       formObject.Tags,
-      formObject.Location
+      formObject.Location,
+      formObject.UploadPasscode || ""
     ),
     c.env.DB.prepare(
       `CREATE TABLE IF NOT EXISTS ${formObject.GalleryTableName} (approved BOOLEAN, width INTEGER, height INTEGER, name TEXT, hash TEXT, path TEXT PRIMARY KEY, dateCreated INTEGER, dateModified INTEGER)`

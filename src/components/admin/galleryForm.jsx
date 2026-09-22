@@ -162,7 +162,7 @@ export const GalleryForm = (props) => {
 
         <label htmlFor="password">
           <i className="bi bi-key"></i>
-          {c.t("password_label")}
+          {c.t("password_label")} (View Album)
           <input
             type="password"
             name="Password"
@@ -173,6 +173,18 @@ export const GalleryForm = (props) => {
         </label>
       </fieldset>
       <fieldset class="grid">
+        <label htmlFor="uploadPasscode">
+          <i className="bi bi-shield-lock"></i>
+          {c.t("upload_passcode_label")} (Guest Uploads)
+          <input
+            type="text"
+            name="UploadPasscode"
+            id="uploadPasscode"
+            value={getValueForProperty("UploadPasscode")}
+            placeholder={c.t("upload_passcode_placeholder")}
+          />
+        </label>
+
         <label htmlFor="reviewers">
           <i className="bi bi-people"></i>
           {c.t("reviewers_label")}
@@ -184,7 +196,8 @@ export const GalleryForm = (props) => {
             placeholder={c.t("reviewers_placeholder")}
           />
         </label>
-
+      </fieldset>
+      <fieldset class="grid">
         <label htmlFor="imagesOrder">
           <i className="bi bi-sort-alpha-down"></i>
           {c.t("images_order_label")}
