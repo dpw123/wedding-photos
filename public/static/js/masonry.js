@@ -129,7 +129,7 @@ class MasonryLayout {
 // Initialize the masonry layout
 const masonry = new MasonryLayout('#masonry-container', {
     gap: 16,
-    minColumnWidth: 200
+    minColumnWidth: 280
 });
 
 // Fix images overlapping incorrectly for mobile devices (specificially iOS Safari)

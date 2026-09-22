@@ -165,6 +165,12 @@ main {
   margin: 0 auto;
 }
 
+/* Expansive modern container on photo gallery views */
+main:has(#mansory-wraper),
+main:has(#masonry-container) {
+  max-width: 1440px;
+}
+
 /* Wedding Hero & Header Banner */
 .wedding-header {
   margin: 1rem auto 1.5rem;
