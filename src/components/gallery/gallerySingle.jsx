@@ -131,7 +131,7 @@ export const Gallery = ({ gallery, images, c }) => (
         src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"
       ></script>
       <script type="module" src="/static/js/initPhotoSwipe.js"></script>
-      <script type="module" src="/static/js/masonry.js"></script>
+      <script type="module" src="/static/js/masonry.js?v=8"></script>
       ${gallery.UploadPasscode ? html`<script type="module" src="/static/js/userUpload.js"></script>` : ''}
     `}
   </Layout>

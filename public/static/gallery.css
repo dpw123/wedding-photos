@@ -362,7 +362,7 @@ header.upload-modal-header {
 
 #masonry-container {
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
