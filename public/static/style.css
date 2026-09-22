@@ -41,84 +41,11 @@ html {
   --pico-card-background-color: var(--color-neutral-medium);
   --pico-card-border-color: var(--border);
   --pico-card-box-shadow: 0 12px 30px rgba(105, 118, 101, 0.12);
-  color-scheme: light;
   --pico-form-element-background-color: #ffffff;
-  --pico-form-element-active-background-color: #ffffff;
-  --pico-form-element-selected-background-color: #ffffff;
   --pico-form-element-border-color: var(--color-neutral-dark);
-  --pico-form-element-active-border-color: var(--color-green-dark);
   --pico-form-element-color: var(--text-dark);
-  --pico-form-element-focus-color: rgba(105, 118, 101, 0.25);
-  --pico-text-selection-color: rgba(173, 140, 132, 0.35);
+  --pico-form-element-focus-color: var(--color-green-dark);
   --pico-border-radius: 14px;
-}
-
-@media only screen and (prefers-color-scheme: dark) {
-  :root,
-  html,
-  body {
-    color-scheme: light;
-    --pico-background-color: var(--color-neutral-light);
-    --pico-color: var(--text-dark);
-    --pico-form-element-background-color: #ffffff;
-    --pico-form-element-active-background-color: #ffffff;
-    --pico-form-element-selected-background-color: #ffffff;
-    --pico-form-element-border-color: var(--color-neutral-dark);
-    --pico-form-element-active-border-color: var(--color-green-dark);
-    --pico-form-element-color: var(--text-dark);
-    --pico-form-element-focus-color: rgba(105, 118, 101, 0.25);
-    --pico-text-selection-color: rgba(173, 140, 132, 0.35);
-  }
-}
-
-/* Ensure inputs and form controls remain clean white with dark readable text on focus/active */
-input:not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
-textarea,
-select {
-  background-color: #ffffff !important;
-  color: var(--text-dark) !important;
-  border: 1px solid var(--color-neutral-dark) !important;
-  border-radius: 12px !important;
-  box-shadow: none !important;
-}
-
-input:not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
-input:not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):active,
-input:not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus-visible,
-textarea:focus,
-textarea:active,
-textarea:focus-visible,
-select:focus,
-select:active,
-select:focus-visible {
-  background-color: #ffffff !important;
-  color: var(--text-dark) !important;
-  border-color: var(--color-green-dark) !important;
-  box-shadow: 0 0 0 3px rgba(105, 118, 101, 0.25) !important;
-  outline: none !important;
-}
-
-/* Text selection / highlighting within inputs and page */
-::selection {
-  background-color: rgba(173, 140, 132, 0.35) !important;
-  color: var(--text-dark) !important;
-}
-
-input::selection,
-textarea::selection {
-  background-color: rgba(173, 140, 132, 0.35) !important;
-  color: var(--text-dark) !important;
-}
-
-/* Autofill styling (prevent black/dark autofill in Chrome/Edge/Safari) */
-input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-text-fill-color: var(--text-dark) !important;
-  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
-  box-shadow: 0 0 0px 1000px #ffffff inset !important;
-  transition: background-color 5000s ease-in-out 0s;
 }
 
 * {
@@ -165,10 +92,19 @@ main {
   margin: 0 auto;
 }
 
-/* Expansive modern container on photo gallery views */
+/* Modern expansive container for photo gallery views */
 main:has(#mansory-wraper),
 main:has(#masonry-container) {
   max-width: 1440px;
+}
+
+/* Text entry boxes when selected (prevent turning black) */
+input:not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):is(:focus, :active),
+textarea:is(:focus, :active),
+select:is(:focus, :active) {
+  background-color: #ffffff !important;
+  color: var(--text-dark) !important;
+  border-color: var(--color-green-dark) !important;
 }
 
 /* Wedding Hero & Header Banner */
@@ -189,7 +125,8 @@ main:has(#masonry-container) {
 }
 
 h1.wedding-title-compact,
-.wedding-title-compact {
+.wedding-title-compact,
+.wedding-title-compact a {
   margin: 0.1rem 0 0.25rem;
   font-family: var(--font-heading);
   font-size: clamp(2rem, 5.5vw, 3rem);
@@ -197,9 +134,7 @@ h1.wedding-title-compact,
   color: #ffffff;
   line-height: 1.15;
   text-shadow: 0 2px 14px rgba(45, 38, 22, 0.4);
-}
-  margin: 0.2rem 0 0.8rem;
-  font-weight: 600;
+  text-decoration: none;
 }
 
 .wedding-date {
