@@ -2,7 +2,7 @@ import { getLangs } from "./localeMiddleware";
 import { getGalleryPath } from "./galleryPath";
 
 const langs = getLangs();
-const CACHE_VERSION = "v8";
+const CACHE_VERSION = "v9";
 
 export const cachePurgeSingle = async (c, galleryTableName) => {
   try {

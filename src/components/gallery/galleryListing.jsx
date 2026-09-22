@@ -45,6 +45,14 @@ export const main = async (c) => {
     })
   );
 
+  // Sort galleries chronologically by gallery date (oldest to newest, undated last)
+  galleries.sort((a, b) => {
+    if (!a.PartyDate && !b.PartyDate) return 0;
+    if (!a.PartyDate) return 1;
+    if (!b.PartyDate) return -1;
+    return new Date(a.PartyDate).getTime() - new Date(b.PartyDate).getTime();
+  });
+
   // Append context with date for the upcoming publication date
   c.set('KV-Cache-Expires', upcomingPublication);
 

@@ -22,7 +22,7 @@ export const cache = () => {
       const lang = await c.t();
 
       // Generate versioned cache key to bust stale cache
-      const CACHE_VERSION = "v8";
+      const CACHE_VERSION = "v9";
       const pathname = new URL(c.req.url).pathname;
       const isEmbed = pathname === '/embed' || c.req.query('embed') === 'true';
       const cacheKey = `page:${CACHE_VERSION}:${pathname}${isEmbed && pathname !== '/embed' ? ':embed' : ''}@${lang}`;

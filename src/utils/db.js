@@ -10,14 +10,14 @@ const ensureUploadPasscodeColumn = async (c) => {
 
 export const getGalleriesFromD1 = async (c) => {
   await ensureUploadPasscodeColumn(c);
-  return await c.env.DB.prepare("SELECT * FROM Galleries ORDER BY PartyDate DESC").all();
+  return await c.env.DB.prepare("SELECT * FROM Galleries ORDER BY CASE WHEN PartyDate IS NULL OR PartyDate = '' THEN 1 ELSE 0 END, PartyDate ASC").all();
 };
 
 export const getGalleriesFromD1wGalleryIsPublic = async (c) => {
   await ensureUploadPasscodeColumn(c);
   try {
     // Attempt to fetch data from the Galleries table
-    const galleries = await c.env.DB.prepare('SELECT * FROM Galleries WHERE GalleryIsPublic = "TRUE" AND (DATETIME(PublicationDate) <= DATETIME("now")  OR PublicationDate = "") ORDER BY PartyDate DESC').all();
+    const galleries = await c.env.DB.prepare('SELECT * FROM Galleries WHERE GalleryIsPublic = "TRUE" AND (DATETIME(PublicationDate) <= DATETIME("now")  OR PublicationDate = "") ORDER BY CASE WHEN PartyDate IS NULL OR PartyDate = \'\' THEN 1 ELSE 0 END, PartyDate ASC').all();
     return galleries;
   } catch (error) {
     console.error("Error fetching galleries:", error.message);

@@ -29,8 +29,8 @@ export const Layout = (props) => {
           <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap" rel="stylesheet" />
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
           <link rel="stylesheet" href="${getPicoCSS(c)}" />
-          <link rel="stylesheet" href="/static/style.css?v=8" />
-          <link rel="stylesheet" href="/static/gallery.css?v=8" />
+          <link rel="stylesheet" href="/static/style.css?v=9" />
+          <link rel="stylesheet" href="/static/gallery.css?v=9" />
           <style>
             html, body {
               background: transparent !important;
@@ -86,9 +86,9 @@ export const Layout = (props) => {
         <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
         <link rel="stylesheet" href="${getPicoCSS(c)}" />
-        <link rel="stylesheet" href="/static/style.css?v=8" />
-        <link rel="stylesheet" href="/static/gallery.css?v=8" />
-        <link rel="stylesheet" href="/static/photoswipe.css?v=8" />
+        <link rel="stylesheet" href="/static/style.css?v=9" />
+        <link rel="stylesheet" href="/static/gallery.css?v=9" />
+        <link rel="stylesheet" href="/static/photoswipe.css?v=9" />
         ${<HeadScripts />}
       </head>
       <body>
