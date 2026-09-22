@@ -22,7 +22,7 @@ export const cache = () => {
       const lang = await c.t();
 
       // Generate versioned cache key to bust stale cache
-      const CACHE_VERSION = "v3";
+      const CACHE_VERSION = "v4";
       const cacheKey = `page:${CACHE_VERSION}:${new URL(c.req.url).pathname}@${lang}`;
 
       // Try to get cached content from KV

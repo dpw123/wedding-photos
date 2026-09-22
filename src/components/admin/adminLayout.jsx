@@ -26,7 +26,7 @@ export const Layout = (props) => {
 
   const breadcrumb = renderBreadcrumb(props.breadcrumb);
   return html`<!doctype html>
-    <html data-theme="auto" lang="${c.t()}">
+    <html data-theme="light" lang="${c.t()}">
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
