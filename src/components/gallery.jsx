@@ -37,6 +37,10 @@ gallery.route('/admin', admin);
 gallery.use('/', cache());
 gallery.get("/", main);
 
+// Embedded galleries view (for embedding into wedding website)
+gallery.use('/embed', cache());
+gallery.get("/embed", main);
+
 // Handle gallery logout - before cache
 gallery.get('/:galleryTableName/logout', handleLogout);
 

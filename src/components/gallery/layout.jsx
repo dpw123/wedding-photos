@@ -11,8 +11,65 @@ export const Layout = (props) => {
   const gallery = props.gallery;
 
   const isSingleGallery = !!gallery;
+  const isEmbed = !!props.isEmbed;
   const bannerTitle = isSingleGallery ? gallery.GalleryName : "Wedding Photo Gallery";
   const bannerDate = isSingleGallery && gallery.PartyDate ? new Date(gallery.PartyDate).toLocaleDateString(c.t("date_locale"), { day: "numeric", month: "long", year: "numeric" }) : null;
+
+  if (isEmbed) {
+    return (
+      html`
+      <!DOCTYPE html>
+      <html data-theme="light" lang=${c.t()}>
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+          <title>${props.title ? `${props.title} | Lauren & Daniel` : 'Lauren & Daniel | Wedding Gallery'}</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap" rel="stylesheet" />
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+          <link rel="stylesheet" href="${getPicoCSS(c)}" />
+          <link rel="stylesheet" href="/static/style.css?v=8" />
+          <link rel="stylesheet" href="/static/gallery.css?v=8" />
+          <style>
+            html, body {
+              background: transparent !important;
+              padding: 0 !important;
+              margin: 0 !important;
+              min-height: auto !important;
+              overflow-y: hidden;
+            }
+            main {
+              max-width: 100% !important;
+              margin: 0 !important;
+              padding: 0 !important;
+            }
+            .galleries-grid {
+              padding: 0.25rem 0;
+            }
+          </style>
+        </head>
+        <body>
+          <main>
+            ${props.children}
+          </main>
+          <script>
+            function sendHeight() {
+              const h = document.documentElement.scrollHeight || document.body.scrollHeight;
+              window.parent.postMessage({ type: 'resize-galleries-embed', height: h }, '*');
+            }
+            window.addEventListener('load', sendHeight);
+            window.addEventListener('resize', sendHeight);
+            if (typeof ResizeObserver !== 'undefined') {
+              new ResizeObserver(sendHeight).observe(document.body);
+            }
+            setTimeout(sendHeight, 200);
+            setTimeout(sendHeight, 800);
+          </script>
+        </body>
+      </html>`
+    );
+  }
 
   return (
     html`

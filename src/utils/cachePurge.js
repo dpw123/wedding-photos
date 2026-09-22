@@ -20,9 +20,10 @@ export const cachePurgeSingle = async (c, galleryTableName) => {
 
 export const cachePurgeHome = async (c) => {
   try {
-    const promises = langs.map(async (lang) => {
-      const cacheKey = `page:${CACHE_VERSION}:${getGalleryPath(c)}@${lang}`;
-      return await c.env.CACHE_KV.delete(cacheKey);
+    const promises = langs.flatMap((lang) => {
+      const homeKey = `page:${CACHE_VERSION}:${getGalleryPath(c)}@${lang}`;
+      const embedKey = `page:${CACHE_VERSION}:${getGalleryPath(c)}embed@${lang}`;
+      return [c.env.CACHE_KV.delete(homeKey), c.env.CACHE_KV.delete(embedKey)];
     });
 
     await Promise.all(promises);
