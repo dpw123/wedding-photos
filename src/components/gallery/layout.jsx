@@ -8,6 +8,12 @@ export const Layout = (props) => {
   const c = props.c;
   const prefetchType = props.prefetch;
   const desc = props.desc || c.env.DESCRIPTION;
+  const gallery = props.gallery;
+
+  const isSingleGallery = !!gallery;
+  const bannerTitle = isSingleGallery ? gallery.GalleryName : "Wedding Photo Gallery";
+  const bannerDate = isSingleGallery && gallery.PartyDate ? new Date(gallery.PartyDate).toLocaleDateString(c.t("date_locale"), { day: "numeric", month: "long", year: "numeric" }) : null;
+
   return (
     html`
     <!DOCTYPE html>
@@ -36,16 +42,26 @@ export const Layout = (props) => {
         <header class="wedding-header">
           <div class="wedding-hero">
             <h1 class="wedding-title-compact">
-              <a href="." style="color: inherit; text-decoration: none;">Wedding Photo Gallery</a>
+              ${isSingleGallery ? bannerTitle : html`<a href="/" style="color: inherit; text-decoration: none;">Wedding Photo Gallery</a>`}
             </h1>
+            ${bannerDate ? html`
+              <div class="wedding-date" style="margin-top: 0.2rem; margin-bottom: 0.3rem;">
+                <span class="pill"><i class="bi bi-calendar-event"></i> ${bannerDate}</span>
+              </div>
+            ` : ''}
             <div class="decorative-line"></div>
             <nav class="button-row" aria-label="Gallery navigation">
               <a class="button" href="https://danlauren.wedding">
                 <i class="bi bi-arrow-left"></i> ${c.t("wedding_website_link")}
               </a>
-              <a class="button" href=".">
+              <a class="button" href="/">
                 <i class="bi bi-images"></i> ${c.t("all_albums_link")}
               </a>
+              ${isSingleGallery && gallery.Password ? html`
+                <a class="button" href="/${gallery.GalleryTableName}/logout">
+                  ${c.t("forget_gallery_password")}
+                </a>
+              ` : ''}
             </nav>
           </div>
         </header>
@@ -59,7 +75,7 @@ export const Layout = (props) => {
           <div>Made with love for family and friends.</div>
           <div style="font-weight: 600; margin-top: 0.35rem;">Lauren Cheveralls &amp; Daniel Welch &bull; 31 August 2027</div>
           <div class="footer-credits">
-            <a href="admin">Admin Panel</a>
+            <a href="/admin">Admin Panel</a>
           </div>
         </footer>
       </body>

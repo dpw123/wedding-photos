@@ -7,51 +7,18 @@ import {
 import { html } from "hono/html";
 
 export const Gallery = ({ gallery, images, c }) => (
-  <Layout title={gallery.GalleryName} c={c} prefetch="single">
+  <Layout title={gallery.GalleryName} gallery={gallery} c={c} prefetch="single">
     <section>
-      <div className="gallery-controls">
-        <a href="./" className="button">
-          <i className="bi bi-arrow-left"></i> {c.t("all_albums_link")}
-        </a>
-        <div className="gallery-actions">
-          {gallery.UploadPasscode && (
-            <button id="openUploadBtn" className="button primary" type="button">
-              <i className="bi bi-cloud-arrow-up"></i> {c.t("upload_photos_button")}
-            </button>
-          )}
-          {gallery.Password && (
-            <a href={gallery.GalleryTableName + "/logout"} className="button">
-              {c.t("forget_gallery_password")}
-            </a>
-          )}
-        </div>
-      </div>
-
-      <div className="gallery-info">
-        <h1 className="gallery-title">{gallery.GalleryName}</h1>
-        {gallery.PartyDate && (
-          <div className="gallery-date">
-            <span className="pill">
-              <i className="bi bi-calendar-event"></i>{" "}
-              {new Date(gallery.PartyDate).toLocaleDateString(c.t("date_locale"), {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            </span>
-          </div>
-        )}
-        {gallery.Tags && (
-          <div className="gallery-tags">
-            <small>
-              <i className="bi bi-tags"></i> {gallery.Tags}
-            </small>
-          </div>
-        )}
-        {gallery.TextField && (
-          <p className="gallery-description">{gallery.TextField}</p>
-        )}
-      </div>
+      {gallery.UploadPasscode && (
+        <button
+          id="openUploadBtn"
+          className="floating-upload-btn button primary"
+          type="button"
+          aria-label="Add photos to album"
+        >
+          <i className="bi bi-cloud-arrow-up"></i> {c.t("upload_photos_button")}
+        </button>
+      )}
 
       {gallery.UploadPasscode && (
         <dialog

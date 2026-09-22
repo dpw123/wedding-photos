@@ -2,11 +2,12 @@ import { getLangs } from "./localeMiddleware";
 import { getGalleryPath } from "./galleryPath";
 
 const langs = getLangs();
+const CACHE_VERSION = "v3";
 
 export const cachePurgeSingle = async (c, galleryTableName) => {
   try {
     const promises = langs.map(async (lang) => {
-      const cacheKey = `page:${getGalleryPath(c)}${galleryTableName}@${lang}`;
+      const cacheKey = `page:${CACHE_VERSION}:${getGalleryPath(c)}${galleryTableName}@${lang}`;
       console.log(cacheKey)
       return await c.env.CACHE_KV.delete(cacheKey);
     });
@@ -20,7 +21,7 @@ export const cachePurgeSingle = async (c, galleryTableName) => {
 export const cachePurgeHome = async (c) => {
   try {
     const promises = langs.map(async (lang) => {
-      const cacheKey = `page:${getGalleryPath(c)}@${lang}`;
+      const cacheKey = `page:${CACHE_VERSION}:${getGalleryPath(c)}@${lang}`;
       return await c.env.CACHE_KV.delete(cacheKey);
     });
 

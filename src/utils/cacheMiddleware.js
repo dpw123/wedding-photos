@@ -21,8 +21,9 @@ export const cache = () => {
     try {
       const lang = await c.t();
 
-      // Generate cache key
-      const cacheKey = `page:${new URL(c.req.url).pathname}@${lang}`;
+      // Generate versioned cache key to bust stale cache
+      const CACHE_VERSION = "v3";
+      const cacheKey = `page:${CACHE_VERSION}:${new URL(c.req.url).pathname}@${lang}`;
 
       // Try to get cached content from KV
       const cachedContent = await c.env.CACHE_KV.getWithMetadata(cacheKey);
